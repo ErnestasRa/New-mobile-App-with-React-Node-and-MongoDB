@@ -10,6 +10,7 @@ import {
 } from '@mui/material'
 import { post } from '../plugins/http'
 
+
 const RegisterPage = () => {
     const emailRef = React.useRef()
     const passwordRef = React.useRef()

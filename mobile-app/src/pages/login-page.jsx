@@ -9,23 +9,33 @@ import {
     Link,
 } from '@mui/material'
 import { post } from '../plugins/http'
+import { useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
     const emailRef = React.useRef()
     const passwordRef = React.useRef()
+    const navigate = useNavigate()
 
     async function loginUser() {
         const userData = {
             email: emailRef.current.value,
             password: passwordRef.current.value,
         }
-
         const res = await post('login', userData)
-        console.log(res.user.secret)
-        if(!res.error){
-            localStorage.setItem('secret', res.user.secret)
+        
+        if(res.error) throw new Error ('user not found!')
+
+        if(!res.error) {
+         localStorage.setItem('secret', res.user.secret)
+         navigate('/loggedin')
         }
 
+        if(!res.error) 
+
+
+
+        emailRef.current.value = ''
+        passwordRef.current.value = ''
     }
 
   return (
