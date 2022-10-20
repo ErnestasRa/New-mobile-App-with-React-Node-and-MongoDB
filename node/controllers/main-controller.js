@@ -12,6 +12,7 @@ module.exports = {
                     password: await bcrypt.hash(password, 10),
                     secret: uid()
                 })
+                console.log(user)
                 const member = await user.save()
        }
         res.send({OK:'ok'})
