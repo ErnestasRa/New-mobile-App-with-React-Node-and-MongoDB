@@ -49,6 +49,11 @@ module.exports = {
         )
         res.send({OK:'ok', update})
 
+    },
+    userinfo: async(req, res) => {
+        const {id} = req.body
+        const userData = await userSchema.find({secret: id})
+        res.send(userData)
     }
 }
 
