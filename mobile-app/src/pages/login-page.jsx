@@ -23,19 +23,17 @@ const LoginPage = () => {
         }
         const res = await post('login', userData)
         
-        if(res.error) throw new Error ('user not found!')
-
-        if(!res.error) {
-         localStorage.setItem('secret', res.user.secret)
-         navigate('/loggedin')
+        if(res.error) {
+            throw new Error ('user not found!')
+        } else {
+            emailRef.current.value = ''
+            passwordRef.current.value = ''
         }
 
-        if(!res.error) 
-
-
-
-        emailRef.current.value = ''
-        passwordRef.current.value = ''
+        if(!res.error) {
+         localStorage.setItem('secret', res.data.secret)
+         navigate('/loggedin')
+        }
     }
 
   return (
