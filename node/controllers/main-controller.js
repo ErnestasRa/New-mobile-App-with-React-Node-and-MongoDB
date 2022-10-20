@@ -54,6 +54,15 @@ module.exports = {
         const {id} = req.body
         const userData = await userSchema.find({secret: id})
         res.send(userData)
+    },
+    imageurl: async(req, res) => {
+        const {url, id} = req.body
+        const update = await userSchema.findOneAndUpdate(
+            {secret: id},
+            {$set: {photo: url}},
+            {new: true}
+        )
+        res.send({OK:'ok', update})
     }
 }
 
