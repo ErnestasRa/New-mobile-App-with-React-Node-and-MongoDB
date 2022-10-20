@@ -13,7 +13,6 @@ import { post } from '../plugins/http'
 const LoginPage = () => {
     const emailRef = React.useRef()
     const passwordRef = React.useRef()
-    const [data, setData] = React.useState('')
 
     async function loginUser() {
         const userData = {
@@ -22,7 +21,11 @@ const LoginPage = () => {
         }
 
         const res = await post('login', userData)
-        console.log(res)
+        console.log(res.user.secret)
+        if(!res.error){
+            localStorage.setItem('secret', res.user.secret)
+        }
+
     }
 
   return (

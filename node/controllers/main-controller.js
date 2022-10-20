@@ -21,9 +21,13 @@ module.exports = {
     login: async (req, res) => {
         const {email,password} = req.body
         const user = await userSchema.findOne({email:`${email}`})
-        const compare = await bcrypt.compare(password, user.password)
-        console.log(compare)
-        res.send({OK:'ok', user})
+        if(user){
+            const compare = await bcrypt.compare(password, user.password)
+            console.log(compare)
+            res.send({user})
+        } else {
+            return res.send({error: 'user not found'})
+        }
     },
     photo: async(req,res) => {
         const {id} = req.body
