@@ -6,14 +6,16 @@ import {
     Button,
     TextField,
 } from '@mui/material'
-import CardComponent from '../components/card-component'
+import CardComponent from '../components/image-component'
 import { post } from '../plugins/http'
+import { useNavigate } from 'react-router-dom'
 
 const UserProfilePage = () => {
     const [picture, setPicture] = React.useState('')
     const [toggle, setToggle] = React.useState('none')
     const photoRef = React.useRef()
     const userSecret = localStorage.getItem('secret')
+    const navigate = useNavigate()
 
     async function getUserData(){
         const userId = {
@@ -43,6 +45,10 @@ const UserProfilePage = () => {
         }
     }
 
+    const navigateToAllPosts = () => {
+        navigate('/allposts')
+    }
+
     React.useEffect(() => {
         getUserData()
     }, [picture])
@@ -55,7 +61,7 @@ const UserProfilePage = () => {
                     url={picture}
                 />
                 <Button onClick={toggleVisibility}>Change Photo</Button>
-                <Button>All Posts</Button>
+                <Button onClick={navigateToAllPosts}>All Posts</Button>
                 <Box display={toggle}>
                     <TextField id="standard-basic" inputRef={photoRef} label="New Photo" variant="standard"/>
                     <Button onClick={changeProfilePhoto}>Change photo</Button>

@@ -1,4 +1,5 @@
 const userSchema = require('../schemas/userSchema')
+const postSchema = require('../schemas/postSchema')
 const bcrypt = require('bcrypt')
 const { uid } = require('uid')
 const sendRes = require("../modules/universal-res")
@@ -63,6 +64,30 @@ module.exports = {
             {new: true}
         )
         res.send({OK:'ok', update})
+    },
+    createpost: async(req, res) => {
+        const {title, photo, id} = req.body
+        
+        async function newPost() {
+            const post = new postSchema({
+                title: title,
+                photo: photo,
+                id: uid(),
+            })
+            const data = await post.save()
+   }
+        res.send({OK: 'ok'})
+        newPost()
+    },
+    getposts: async(req, res) => {
+        const allposts = await postSchema.find({})
+        res.send(allposts)
+    },
+    getsinglepost: async(req, res) => {
+        const {id} = req.params
+        const singlePost = await postSchema.find({id: id})
+        console.log(id)
+        res.send(singlePost)
     }
 }
 
