@@ -1,25 +1,22 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
     email: {
         type: String,
-        required: true
+        required: true,
     },
     password: {
         type: String,
-        required: true
+        required: true,
     },
     secret: {
         type: String,
-        required: true
+        required: true,
     },
-    photo: {
-        type: String,
-        required: true
-    }
+
 })
 
-const exportUser = mongoose.model("type11UsersNew", userSchema)
+const exportUser = mongoose.model('mobileAppUsers', userSchema)
 
 module.exports = exportUser

@@ -6,8 +6,7 @@ import RegisterPage from './pages/register-page';
 
 function App() {
   return (
-    <MainContext.Provider value={{}}
-    >
+    <MainContext.Provider value={{}}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<RegisterPage />} />

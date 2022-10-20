@@ -1,13 +1,11 @@
-const express = require("express")
+const express = require('express')
 const router = express.Router()
-const {emailValid, passwordsValid, userValid, secretValid} = require("../midleware/middle")
+const {emailValid, passwordValid} = require('../middleware/middle')
+const {register, login, photo, update} = require('../controllers/main-controller')
 
-const {register, login, getPhoto} = require("../controllers/mainController")
-
-
-router.post("/register", emailValid, passwordsValid, userValid, register)
-router.post("/login", login)
-router.get("/getPhoto/:secret", secretValid, getPhoto)
-
+router.post('/register', emailValid, passwordValid, register)
+router.post('/login', emailValid, login)
+router.post('/photo', photo)
+router.post('/update', emailValid,  update)
 
 module.exports = router
