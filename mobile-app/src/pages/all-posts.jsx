@@ -8,19 +8,23 @@ import {
 } from '@mui/material'
 import CardComponent from '../components/image-component'
 import { useNavigate } from 'react-router-dom'
-import { get } from '../plugins/http'
+import { get, post } from '../plugins/http'
 import PostCard from '../components/post-component'
 
 const AllPosts = () => {
     const navigate = useNavigate()
     const [posts, setPosts] = React.useState([])
+    const userId = localStorage.getItem('secret')
 
     const createPost = () => {
         navigate('/createpost')
     }
     
     async function getAllPosts() {
-        const res = await get('allposts')
+        const secretKey = {
+            secret: userId
+        }
+        const res = await post('allposts', secretKey)
         setPosts(res)
     }
 
@@ -31,7 +35,7 @@ const AllPosts = () => {
     }
 
     React.useEffect(() => {
-        getAllPosts()
+       getAllPosts()
     }, [])
 
     return (

@@ -42,9 +42,9 @@ module.exports = {
         res.send(photoURL)
     },
     update: async(req, res) => {
-        const {email, photo, id} = req.body
+        const {email, photo, secret} = req.body
         const update = await userSchema.findOneAndUpdate(
-            {_id: id},
+            {secret: secret},
             {$set: {email: email, photo: photo}},
             {new : true}
         )
@@ -52,14 +52,14 @@ module.exports = {
 
     },
     userinfo: async(req, res) => {
-        const {id} = req.body
-        const userData = await userSchema.find({secret: id})
+        const {secret} = req.body
+        const userData = await userSchema.find({secret: secret})
         res.send(userData)
     },
     imageurl: async(req, res) => {
-        const {url, id} = req.body
+        const {url, secret} = req.body
         const update = await userSchema.findOneAndUpdate(
-            {secret: id},
+            {secret: secret},
             {$set: {photo: url}},
             {new: true}
         )
@@ -86,7 +86,6 @@ module.exports = {
     getsinglepost: async(req, res) => {
         const {id} = req.params
         const singlePost = await postSchema.find({id: id})
-        console.log(id)
         res.send(singlePost)
     }
 }

@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainContext from './context/main-context'
 import AllPosts from './pages/all-posts';
 import CreatePost from './pages/create-post';
+import ErrorPage from './pages/error-page';
 import LoginPage from './pages/login-page';
 import RegisterPage from './pages/register-page';
 import SinglePost from './pages/single-post';
@@ -19,6 +20,7 @@ function App() {
           <Route path="/allposts" element={<AllPosts />} />
           <Route path="/createpost" element={<CreatePost />} />
           <Route path="/singlepost" element={<SinglePost />} />
+          <Route path="/error" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </MainContext.Provider>

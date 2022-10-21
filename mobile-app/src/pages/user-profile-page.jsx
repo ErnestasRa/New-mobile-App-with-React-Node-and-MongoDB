@@ -19,7 +19,7 @@ const UserProfilePage = () => {
 
     async function getUserData(){
         const userId = {
-            id: userSecret,
+            secret: userSecret,
         }
         const res = await post('userinfo', userId)
         setPicture(res[0].photo)
@@ -28,7 +28,7 @@ const UserProfilePage = () => {
     async function changeProfilePhoto() {
         const newPhoto = {
             url: photoRef.current.value,
-            id: userSecret,
+            secret: userSecret,
         }
         const res = await post('imageurl', newPhoto)
         setPicture(res.update.photo)
@@ -51,6 +51,9 @@ const UserProfilePage = () => {
 
     React.useEffect(() => {
         getUserData()
+        if(!localStorage.getItem('secret')){
+            navigate('/error')
+        }
     }, [picture])
 
   return (

@@ -5,23 +5,26 @@ import {
     Box,
     TextField,
     Button,
-    Typography,
-    Link,
 } from '@mui/material'
 import { post } from '../plugins/http'
+import { useNavigate } from 'react-router-dom'
 
 const CreatePost = () => {
     const photoRef = React.useRef()
     const titleRef = React.useRef()
     const userId = localStorage.getItem('secret')
+    const navigate = useNavigate()
 
     async function createPost() {
         const postData = {
-            id: userId,
+            secret: userId,
             photo: photoRef.current.value,
             title: titleRef.current.value,
         }
         const res = await post('createpost', postData)
+        if(!res.error){
+            navigate('/allposts')
+        }
     }
 
     return (

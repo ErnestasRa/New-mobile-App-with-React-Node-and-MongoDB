@@ -4,16 +4,16 @@ import {
     Container,
     Paper,
     Box,
-    TextField,
     Button,
-    Typography,
-    Link,
 } from '@mui/material'
 import PostCard from '../components/post-component'
+import { useNavigate } from 'react-router-dom'
 
 const SinglePost = () => {
     const [post, setPost] = React.useState([])
     const postId = localStorage.getItem('id')
+    const userId = localStorage.getItem('secret')
+    const navigate = useNavigate()
 
    async function getPage() {
     const res = await get('singlepost/' + postId)
@@ -22,7 +22,8 @@ const SinglePost = () => {
 
    React.useEffect(() => {
     getPage()
-   }, [])
+    if(!localStorage.getItem('secret')) navigate('/error')
+   })
 
   return (
     <Container>
@@ -32,6 +33,7 @@ const SinglePost = () => {
                     photo={post.photo}
                     title={post.title}
                 />
+                <Button>All posts</Button>
             </Box>
         </Paper>
     </Container>

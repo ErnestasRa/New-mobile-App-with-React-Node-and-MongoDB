@@ -27,4 +27,14 @@ module.exports = {
 
       next()
     },
+    isSecretValid: (req, res, next) => {
+      const { secret } = req.body
+      
+      if(!secret){
+        return res.send({error: 'User not logged in'})
+      }
+
+      next()
+    }
+
   }
