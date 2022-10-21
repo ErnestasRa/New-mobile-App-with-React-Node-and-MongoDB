@@ -50,9 +50,10 @@ const UserProfilePage = () => {
     }
 
     React.useEffect(() => {
-        getUserData()
         if(!localStorage.getItem('secret')){
             navigate('/error')
+        } else {
+            getUserData()
         }
     }, [picture])
 
