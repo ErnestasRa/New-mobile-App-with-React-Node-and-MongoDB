@@ -21,8 +21,11 @@ const SinglePost = () => {
    } 
 
    React.useEffect(() => {
-    getPage()
-    if(!localStorage.getItem('secret')) navigate('/error')
+       if(!localStorage.getItem('secret')) {
+        navigate('/error')
+       } else {
+        getPage()
+       }
    })
 
   return (
